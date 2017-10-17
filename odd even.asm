@@ -3,12 +3,9 @@ org 100h
 .model small
 .stack 100h
 .data
-	evn db 10,13,"Even Number$"     
-	odd db 10,13,"Odd Number$" 
-	 
 	n db 0
 	rem db 0
-	res db 0
+	
 .code
 
 main proc
@@ -29,23 +26,28 @@ main proc
 	mov bx,2
 	div bx
 	
-	mov cl,al
-	mov ch,dl
 	
-	add cl,'0'
-	add ch,'0'
+	mov rem,dl
+	add rem,'0'
+		
+;	print "Remainder:: "
+;	mov ah,2
+;	mov dl,rem
+;	int 21h
+;	printn " "
 	
-	print "Result:: "
-	mov ah,2
-	mov dl,cl
-	int 21h
-	printn " "
+	cmp rem,'1'
+	jne even
+	print "Odd Number" 
+	jmp exit
 	
-	print "Remainder:: "
-	mov ah,2
-	mov dl,ch
-	int 21h
+	even:
+		print "Even Number."
+		jmp exit
 	
+	exit:  
+		mov ah,4ch
+		int 21h
 	
 	main endp
 
