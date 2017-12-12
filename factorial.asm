@@ -10,29 +10,16 @@ main proc
 	mov ax,@data
 	mov ds,ax
 	
-	mov ax,15
-	mov bx,0
+	mov cx,6
+	mov ax,1
 	
-	check:
+	fact:
+	mul cx
+	loop fact
 	
-	cmp ax,0
-	je print
-	
-	test ax,1
-	jz notcount
-	inc bx
-	
-	notcount:
-	
-	shr ax,1
-	jmp check
-	
-	print:
-	           
-	Print "NO of 1 is :: "           
-	mov ax,bx
+	print "Output:: "
 	call outdec
-
+	
 	mov ah,4ch
 	int 21h 
 	
